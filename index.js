@@ -111,6 +111,12 @@ function orderTasksByParent(tasks) {
     process.exit();
   }
 
+  // create a command line box
+
+  console.log("/-------------------\\");
+  console.log("|   GitUp-ClickUp   |");
+  console.log("\\-------------------/");
+
   // check operating system if git is installed
   const testGitInstall = isGitInstalled();
   if (!testGitInstall) {
