@@ -1,0 +1,20 @@
+{
+  "name": "gitup-clickup",
+  "version": "1.0.3",
+  "type": "module",
+  "description": "Generate your git commits with ClickUp",
+  "main": "index.js",
+  "bin": {
+    "gitcu": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "gabedurand",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.3.4",
+    "prompts": "^2.4.2",
+    "shelljs": "^0.8.5"
+  }
+}
