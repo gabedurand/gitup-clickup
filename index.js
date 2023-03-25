@@ -418,28 +418,8 @@ function orderTasksByParent(tasks) {
     COMMITMESSAGE = "CU-" + SELECTEDTASKID + " " + commitPrompt.value;
   }
 
-  // commit and push
-  const tty = process.platform === "win32" ? "CON" : "/dev/tty";
-  // get current branch
-  const currentBranch = execSync("git rev-parse --abbrev-ref HEAD").toString();
-
-  // await exec(
-  //   "git add . < " + tty,
-  //   { cwd: "." },
-  //   function (error, stdout, stderr) {
-  //     console.log("staging files");
-  //   }
-  // );
-
-  // await exec(
-  //   "git commit -m '" + COMMITMESSAGE + "' < " + tty,
-  //   { cwd: "." },
-  //   function (error, stdout, stderr) {
-  //     console.log("adding commit message");
-  //   }
-  // );
   shell.exec(`git commit -am "${COMMITMESSAGE}"`);
-  console.log("commit message saved. Ready to push commit.");
+  console.log("commit message saved.");
 
   const pushCommit = await prompts(
     [
@@ -456,13 +436,4 @@ function orderTasksByParent(tasks) {
   if (pushCommit) {
     shell.exec("git push origin HEAD");
   }
-
-  // shell.exec(`git push origin HEAD`)
-  // await exec(
-  //   "git push origin HEAD < " + tty,
-  //   { cwd: "." },
-  //   function (error, stdout, stderr) {
-  //     console.log(`pushing ${currentBranch} to origin`);
-  //   }
-  // );
 })();
