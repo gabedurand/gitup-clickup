@@ -440,6 +440,23 @@ function orderTasksByParent(tasks) {
   // );
   shell.exec(`git commit -am "${COMMITMESSAGE}"`);
   console.log("commit message saved. Ready to push commit.");
+
+  const pushCommit = await prompts(
+    [
+      {
+        type: "confirm",
+        name: "value",
+        message: "Push Commit?",
+        initial: true,
+      },
+    ],
+    { onCancel }
+  );
+
+  if (pushCommit) {
+    shell.exec("git push origin HEAD");
+  }
+
   // shell.exec(`git push origin HEAD`)
   // await exec(
   //   "git push origin HEAD < " + tty,
