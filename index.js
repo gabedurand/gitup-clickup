@@ -5,6 +5,7 @@ import ax from "axios";
 import os from "os";
 import fs from "fs";
 import { execSync, exec } from "child_process";
+import shell from "shelljs";
 
 const USERHOMEDIR = os.homedir();
 const CONFIGFILE = USERHOMEDIR + "/.gitup-clickup.json";
@@ -422,27 +423,29 @@ function orderTasksByParent(tasks) {
   // get current branch
   const currentBranch = execSync("git rev-parse --abbrev-ref HEAD").toString();
 
-  await exec(
-    "git add . < " + tty,
-    { cwd: "." },
-    function (error, stdout, stderr) {
-      console.log("staging files");
-    }
-  );
+  // await exec(
+  //   "git add . < " + tty,
+  //   { cwd: "." },
+  //   function (error, stdout, stderr) {
+  //     console.log("staging files");
+  //   }
+  // );
 
-  await exec(
-    "git commit -m '" + COMMITMESSAGE + "' < " + tty,
-    { cwd: "." },
-    function (error, stdout, stderr) {
-      console.log("adding commit message");
-    }
-  );
-
-  await exec(
-    "git push origin HEAD < " + tty,
-    { cwd: "." },
-    function (error, stdout, stderr) {
-      console.log(`pushing ${currentBranch} to origin`);
-    }
-  );
+  // await exec(
+  //   "git commit -m '" + COMMITMESSAGE + "' < " + tty,
+  //   { cwd: "." },
+  //   function (error, stdout, stderr) {
+  //     console.log("adding commit message");
+  //   }
+  // );
+  shell.exec(`git commit -am "${COMMITMESSAGE}"`);
+  console.log("commit message saved. Ready to push commit.");
+  // shell.exec(`git push origin HEAD`)
+  // await exec(
+  //   "git push origin HEAD < " + tty,
+  //   { cwd: "." },
+  //   function (error, stdout, stderr) {
+  //     console.log(`pushing ${currentBranch} to origin`);
+  //   }
+  // );
 })();
