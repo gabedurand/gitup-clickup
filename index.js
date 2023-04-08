@@ -390,6 +390,7 @@ function orderTasksByParent(tasks) {
   // save as previous taskid in config
   updateConfigFile({ lastTaskId: SELECTEDTASKID });
 
+  shell.exec(`git add .`);
   // prompt for commit message
   const commitPrompt = await prompts(
     [
@@ -418,7 +419,7 @@ function orderTasksByParent(tasks) {
     COMMITMESSAGE = "CU-" + SELECTEDTASKID + " " + commitPrompt.value;
   }
 
-  shell.exec(`git commit -am "${COMMITMESSAGE}"`);
+  shell.exec(`git commit -m "${COMMITMESSAGE}"`);
   console.log("commit message saved.");
 
   const pushCommit = await prompts(
